@@ -50,5 +50,16 @@
     "request-promise-native": "^1.0.7",
     "sequelize": "^5.19.6",
     "source-map-support": "^0.5.13"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hilmiID/ride-hailing-part-1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hilmiID/ride-hailing-part-1/issues"
+  },
+  "homepage": "https://github.com/hilmiID/ride-hailing-part-1#readme"
 }
