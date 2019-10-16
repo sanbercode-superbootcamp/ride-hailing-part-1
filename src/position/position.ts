@@ -21,9 +21,8 @@ export async function showPosition(req, res) {
                 rider_id: rider_id
             }
         });
-        res.json({
-            show
-        })
+        console.log('isi show: '+show[0]);
+        res.send(`{ ${show[0]['latitude']}, ${show[0]['longitude']} }`)
     }catch(err){
         console.log('error di showPosition: '+err);
     }

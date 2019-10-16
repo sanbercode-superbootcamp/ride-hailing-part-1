@@ -9,6 +9,23 @@ interface Movement {
     south: number;
 }
 
+export async function showPoint(req, res) {
+    const rider_id = req.params.rider_id;
+    console.log('showPosition param: '+rider_id);
+
+    try{
+        const show = await DriverScore.findAll({
+            where: {
+                rider_id: rider_id
+            }
+        });
+        console.log('isi show: '+show[0]);
+        res.send(`{ ${show[0]['score']} }`)
+    }catch(err){
+        console.log('error di showPosition: '+err);
+    }
+}
+
 async function scoreUpdater(movement: Movement) {
     const {north, south, east, west, rider_id} = movement;
     const [scoreRide, created] = await DriverScore.findOrCreate({
