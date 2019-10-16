@@ -1,12 +1,32 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
+import { TrackEvent } from "./orm";
 
-export function track(req: Request, res: Response) {
+export async function track(req: Request, res: Response) {
   // parsing input
-  const { north, west, east, south } = req.body;
-  if (!north || !west || !east || !south) {
+  const { rider_id, north, west, east, south } = req.body;
+  if (!rider_id || !north || !west || !east || !south) {
     res.status(400).json({
       ok: false,
-      error: 'parameter tidak lengkap'
+      error: "parameter tidak lengkap"
+    });
+    return;
+  }
+
+  // save tracking movement
+  const track = new TrackEvent({
+    rider_id,
+    north,
+    west,
+    east,
+    south
+  });
+  try {
+    await track.save();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      ok: false,
+      message: "gagal menyimpan data"
     });
     return;
   }
