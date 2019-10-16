@@ -3,11 +3,13 @@ import { syncDB } from './orm';
 import { connectToBus } from './bus';
 import { positionProjector } from './position';
 
-async function startApp() {
-  await syncDB();
-  await connectToBus();
-  positionProjector();
-  startServer();
+
+async function initApp() {
+    await syncDB();
+    await connectToBus();
+    positionProjector();
+    startServer();
 }
 
-startApp();
+initApp();
+
