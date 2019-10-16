@@ -25,9 +25,9 @@ async function positionUpdater(movement: Movement) {
   });
   // update latitude & longitude
   let latitude = parseFloat(position.get("latitude") as string);
-  latitude = latitude + north - south;
+  latitude = latitude + Number(east) - Number(west);
   let longitude = parseFloat(position.get("longitude") as string);
-  longitude = longitude + east - west;
+  longitude = longitude + Number(north) - Number(south);
 
   try {
     await position.update({
@@ -37,6 +37,12 @@ async function positionUpdater(movement: Movement) {
   } catch (err) {
     console.error(err);
   }
+
+  bus.publish("rider.position", {
+    rider_id,
+    longitude,
+    latitude
+  });
 }
 
 export function positionProjector(): number {

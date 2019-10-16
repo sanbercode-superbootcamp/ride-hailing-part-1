@@ -10,17 +10,14 @@ const db = new Sequelize({
   logging: false
 });
 
-export class TrackEvent extends Model {}
-TrackEvent.init(
+export class ScoreGenerator extends Model {};
+ScoreGenerator.init(
   {
     rider_id: DataTypes.INTEGER,
-    north: DataTypes.FLOAT,
-    west: DataTypes.FLOAT,
-    east: DataTypes.FLOAT,
-    south: DataTypes.FLOAT
+    score: DataTypes.FLOAT
   },
-  { modelName: "track_event", sequelize: db }
-);
+  { modelName: 'score_generator', sequelize: db }
+)
 
 export class DriverPosition extends Model {};
 DriverPosition.init(
