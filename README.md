@@ -1,64 +1,33 @@
-# Ride Hailing App
+# Ride Hailing App Part-1
 
-Implementasi sederhana pattern CQRS dengan Eventsourcing
+This App divided into 3 services
+1. Driver Tracker Service
+2. Location Updater Service
+3. Performance Monitor Service
 
-## Homework
-
-Buat 3 buah service yang terhubung melalui sebuah message bus
-
-1. Driver tracker
-
-    driver tracker memiliki endpoint yang berfungsi mengirim informasi mengenai perpindahan driver relatif terhadap arah mata angin
-
-    ```bash
-    POST /track { north, south, west, east, rider_id  }
-    ```
-
-    setiap event perpindahan akan disimpan ke `eventstore` yang direpresentasikan dalam bentuk fisik berupa database `SQL`.
-
-    layanan juga akan mengimisikan `event` `driver.moved` dengan payload sebagai berikut
-
-    ```js
-    { north, south, west, east, rider_id  }
-    ```
-
-2. Position Monitoring
-
-    service ini akan melakukan proyeksi posisi driver dalam GPS. posisi driver akan disimpan dalam database `SQL` yang berisi informasi berikut
-
-    ```js
-    { rider_id, latitude, longitude }
-    ```
-
-    service ini juga dapat mengirim informasi mengenai posisi rider
-
-    ```bash
-    GET /position/:rider_id
-    ```
-
-    mengembalikan payload sebagai berikut
-
-    ```js
-    { latitude, longitude }
-    ```
-
-3. Performance monitoring
-
-    service ini akan menambahkan point driver tiap kali driver berpindah sejauh 1 KM, 1 Point untuk tiap KM-nya. Point dapat dibaca dengan mengakses endpoint berikut.
-
-    ```bash
-    GET /point/:rider_id
-    ```
-
-    mengembalikan payload sebagai berikut
-
-    ```js
-    { point }
-    ```
+This App use PostgreSQL as database system, so you have to make sure to have postgresql running on your system.
 
 
+## Getting Started
+```
+npm install
+npm run build
+```
 
+### Start First Service
+```
+export RH_DT_PORT=3001
+npm run start-driver-tracker
+```
 
+### Start Second Service
+```
+export RH_LU_PORT=3002
+npm run start-loc-updater
+```
 
-
-
+### Start Third Service
+```
+export RH_PM_PORT=3003
+npm run start-pf-monitor
+```
