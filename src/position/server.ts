@@ -3,12 +3,16 @@ import * as cors from 'cors'
 import {createServer} from 'http'
 import {json as jsonBodyParser} from 'body-parser'
 import { Server } from 'net'
+import { showPosition } from './position'
 
-const PORT = process.env['RH_PORT'];
+const PORT = process.env['RH_PORT'] || 3002;
 
 const app = express();
 app.set('port', PORT)
 app.use(cors());
+
+// routing
+app.get('/position/:rider_id', showPosition);
 
 const server = createServer(app);
 

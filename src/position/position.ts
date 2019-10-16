@@ -1,5 +1,7 @@
 import { bus } from "./bus";
 import {DriverPosition} from './orm'
+import { parse } from "url";
+import { Dictionary } from "lodash";
 
 interface Movement {
     rider_id: number;
@@ -7,6 +9,24 @@ interface Movement {
     west: number;
     east: number;
     south: number;
+}
+
+export async function showPosition(req, res) {
+    const rider_id = req.params.rider_id;
+    console.log('showPosition param: '+rider_id);
+
+    try{
+        const show = await DriverPosition.findAll({
+            where: {
+                rider_id: rider_id
+            }
+        });
+        res.json({
+            show
+        })
+    }catch(err){
+        console.log('error di showPosition: '+err);
+    }
 }
 
 async function positionUpdater(movement: Movement) {

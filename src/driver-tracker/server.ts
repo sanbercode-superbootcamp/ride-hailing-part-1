@@ -5,7 +5,7 @@ import {json as jsonBodyParser} from 'body-parser'
 import { Server } from 'net';
 import {track} from './track'
 
-const PORT = process.env['RH_PORT'];
+const PORT = process.env['RH_PORT'] || 3001;
 
 const app = express();
 app.set('port', PORT)
