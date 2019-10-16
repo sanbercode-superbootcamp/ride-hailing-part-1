@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import {TrackEvent, DriverPosition} from './orm'
+import { bus } from './bus';
 
 export async function track(req: Request, res: Response) {
     //parsing input
@@ -30,34 +31,14 @@ export async function track(req: Request, res: Response) {
         })
     }
 
-    //update driver position
-    const [position, created] = await DriverPosition.findOrCreate({
-        defaults:{
-            latitude: 0,
-            longitude: 0
-        },
-        where: {
-            rider_id
-        }
+    bus.publish('rider.moved', {
+        rider_id,
+        north,
+        west,
+        east,
+        south
     });
-    let latitude = position.get('latitude');
-    latitude = latitude + north - south;
-    let longitude = position.get('longitude');
-    longitude = longitude + east - west;
-    try{
-        await position.update(
-            {
-                latitude,
-                longitude
-            }
-        );
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            ok:false,
-            message: "gagal menyimpan posisi driver"
-        })
-    } 
+
     //encode output
     res.json({
         ok: true
