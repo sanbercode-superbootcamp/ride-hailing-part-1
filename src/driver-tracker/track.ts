@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { TrackEvent, DriverPosition } from "./orm";
 import { delay } from "bluebird";
+import { bus } from "./bus";
 
 export async function track(req: Request, res: Response) {
   // parsing input
-  const { rider_id, north, west, east, south } = req.body;
+  let { rider_id, north, west, east, south } = req.body;
   if (!rider_id || !north || !west || !east || !south) {
     res.status(400).json({
       ok: false,
@@ -12,6 +13,7 @@ export async function track(req: Request, res: Response) {
     });
     return;
   }
+
 
   // save tracking movement
   const track = new TrackEvent({
@@ -32,35 +34,13 @@ export async function track(req: Request, res: Response) {
     return;
   }
 
-  // update driver position
-  const [position, created] = await DriverPosition.findOrCreate({
-    defaults: {
-      latitude: 0,
-      longitude: 0
-    },
-    where: {
-      rider_id
-    }
+  bus.publish("rider.moved", {
+    rider_id,
+    north,
+    west,
+    east,
+    south
   });
-  // update latitude & longitude
-  let latitude = position.get("latitude");
-  latitude = latitude + north - south;
-  let longitude = position.get("longitude");
-  longitude = longitude + east - west;
-
-  try {
-    await position.update({
-      latitude,
-      longitude
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      ok: false,
-      message: "gagal menyimpan posisi driver"
-    });
-    return;
-  }
 
   // encode output
   res.json({
