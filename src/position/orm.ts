@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
 
-const db = new Sequelize({
+export const db = new Sequelize({
   database: "ridehailing",
   username: "postgres",
   password: "postgres",
@@ -10,7 +10,7 @@ const db = new Sequelize({
   logging: false
 });
 
-export class TrackEvent extends Model {}
+export class TrackEvent extends Model { }
 TrackEvent.init(
   {
     rider_id: DataTypes.INTEGER,
@@ -22,12 +22,12 @@ TrackEvent.init(
   { modelName: "track_event", sequelize: db }
 );
 
-export class DriverPosition extends Model {};
+export class DriverPosition extends Model { };
 DriverPosition.init(
   {
     rider_id: DataTypes.INTEGER,
     latitude: DataTypes.FLOAT,
-    longitude: DataTypes.FLOAT,
+    longitude: DataTypes.FLOAT
   },
   { modelName: 'driver_position', sequelize: db }
 )

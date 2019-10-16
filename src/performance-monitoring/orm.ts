@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
 
-const db = new Sequelize({
+export const db = new Sequelize({
   database: "ridehailing",
   username: "postgres",
   password: "postgres",
@@ -27,9 +27,18 @@ DriverPosition.init(
   {
     rider_id: DataTypes.INTEGER,
     latitude: DataTypes.FLOAT,
-    longitude: DataTypes.FLOAT,
+    longitude: DataTypes.FLOAT
   },
   { modelName: 'driver_position', sequelize: db }
+)
+
+export class DriverPoint extends Model { };
+DriverPoint.init(
+  {
+    rider_id: DataTypes.INTEGER,
+    point: DataTypes.INTEGER
+  },
+  { modelName: 'driver_point', sequelize: db }
 )
 
 export function syncDB(): Promise<Sequelize> {

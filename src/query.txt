@@ -1,0 +1,13 @@
+query server
+
+PORT bergantung setting awal
+
+http --json -f POST http://localhost:3002/track north=10 east=0 west=0 south=0 rider_id=1
+
+http --json GET http://localhost:3001/position/1
+
+http --json GET http://localhost:3000/point/1
+
+
+query database
+

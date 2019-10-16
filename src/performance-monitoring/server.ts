@@ -3,8 +3,7 @@ import * as cors from 'cors';
 import { createServer } from 'http';
 import { Server } from 'net';
 import { json as jsonBodyParser } from 'body-parser';
-import { getPosition } from './position';
-import { db, DriverPosition } from './orm';
+import { getPoint } from './performance';
 
 const PORT = process.env['RH_PORT'] || 3000;
 
@@ -13,7 +12,7 @@ app.set('port', PORT);
 app.use(cors());
 
 // routing
-app.get('/position/:rider_id', jsonBodyParser(), getPosition);
+app.get('/point/:rider_id', jsonBodyParser(), getPoint);
 
 const server = createServer(app);
 
