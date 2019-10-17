@@ -1,6 +1,5 @@
 import { DriverPosition } from "./orm";
 import { bus } from "../lib/bus";
-import { NatsError } from "nats";
 
 interface Movement {
   rider_id: number;
