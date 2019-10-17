@@ -10,16 +10,13 @@ const db = new Sequelize({
   logging: false
 });
 
-export class TrackEvent extends Model {}
-TrackEvent.init(
+export class Performance extends Model {}
+Performance.init(
   {
     rider_id: DataTypes.INTEGER,
-    north: DataTypes.FLOAT,
-    west: DataTypes.FLOAT,
-    east: DataTypes.FLOAT,
-    south: DataTypes.FLOAT
+    point: DataTypes.FLOAT
   },
-  { modelName: "track_event", sequelize: db }
+  { modelName: "performance", sequelize: db }
 );
 
 export function syncDB() {
