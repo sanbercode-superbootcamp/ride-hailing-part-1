@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import { Performance } from "./orm";
-import { delay } from "bluebird";
-import { DriverPosition } from "../position/orm";
 import { bus } from "../lib/bus";
 
 interface Movement {
@@ -23,7 +21,7 @@ export async function getPerformance(req: Request, res: Response) {
     return;
   }
 
-  const [performance, created] = await Performance.findOrCreate({
+  const performance = await Performance.findOne({
     where: { rider_id }
   });
   if (!performance) {
