@@ -1,5 +1,5 @@
 import { DriverPosition } from "./orm";
-import { bus } from "./bus";
+import { bus } from "../lib/bus";
 import { NatsError } from "nats";
 
 interface Movement {
@@ -8,6 +8,24 @@ interface Movement {
   west: number;
   east: number;
   south: number;
+}
+
+export async function getPosition(req, res) {
+  const rider_id = req.params.rider_id;
+  if (!rider_id) {
+    res.sendStatus(400).json({
+      ok: false,
+      error: "parameter tidak lengkap"
+    });
+    return;
+  }
+
+  const position = await DriverPosition.findOne({
+    where: { rider_id }
+  });
+  const latitude = position.get("latitude");
+  const longitude = position.get("longitude");
+  res.send({ latitude, longitude });
 }
 
 async function positionUpdater(movement: Movement) {
@@ -24,10 +42,10 @@ async function positionUpdater(movement: Movement) {
     }
   });
   // update latitude & longitude
-  let latitude = parseFloat(position.get("latitude") as string);
-  latitude = latitude + north - south;
-  let longitude = parseFloat(position.get("longitude") as string);
-  longitude = longitude + east - west;
+  let latitude = parseFloat(position.get("latitude") as string + (north - south));
+  let longitude = parseFloat(position.get("longitude") as string + (east - west));
+
+  console.log('east ', typeof(east));
 
   try {
     await position.update({
