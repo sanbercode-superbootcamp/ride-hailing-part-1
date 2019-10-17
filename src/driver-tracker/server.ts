@@ -1,10 +1,11 @@
-import * as express from 'express';
-import * as cors from 'cors';
-import { createServer } from 'http';
-import { track } from './track';
-import { json as jsonBodyParser } from 'body-parser';
+import * as express from 'express'
+import * as cors from 'cors'
+import {createServer} from 'http'
+import {json as jsonBodyParser} from 'body-parser'
+import { Server } from 'net';
+import {track} from './track'
 
-const PORT = process.env['RH_PORT'];
+const PORT = 3001; //process.env['RH_PORT']
 
 const app = express();
 app.set('port', PORT)
@@ -15,8 +16,8 @@ app.post('/track', jsonBodyParser(), track)
 
 const server = createServer(app);
 
-export function startServer() {
-    server.listen(PORT, () => {
-        console.log('server listen on port', PORT);
+export function  startServer(): Server {
+    return server.listen(PORT, () => {
+        console.log('server listen on port ', PORT);
     });
 }

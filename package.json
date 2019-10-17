@@ -5,6 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
+    "start-track": "node dist/driver-tracker",
+    "start-position": "node dist/position",
     "test": "nyc mocha",
     "test-e2e": "nyc mocha --config ./test/.mocharc.yaml",
     "watch-ts": "tsc -w",
