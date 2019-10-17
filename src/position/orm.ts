@@ -3,7 +3,7 @@ import { Sequelize, Model, DataTypes } from "sequelize";
 const db = new Sequelize({
   database: "ridehailing",
   username: "postgres",
-  password: "postgres",
+  password: "root",
   host: "localhost",
   port: 5432,
   dialect: "postgres",
@@ -30,7 +30,16 @@ DriverPosition.init(
     longitude: DataTypes.FLOAT,
   },
   { modelName: 'driver_position', sequelize: db }
-)
+);
+
+export class DriverPoint extends Model {};
+DriverPoint.init(
+  {
+    rider_id: DataTypes.INTEGER,
+    points: DataTypes.INTEGER,
+  },
+  { modelName: 'driver_points', sequelize: db }
+);
 
 export function syncDB(): Promise<Sequelize> {
   return db.sync();

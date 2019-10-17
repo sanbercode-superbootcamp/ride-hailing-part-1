@@ -10,7 +10,9 @@ interface Movement {
   south: number;
 }
 
-async function positionUpdater(movement: Movement) {
+async function positionUpdater(movement: Movement) { //movement return object
+  console.log(movement);
+  console.log("das ist 2");
   const { north, south, east, west, rider_id } = movement;
   console.log("update position");
   // update driver position
@@ -24,10 +26,10 @@ async function positionUpdater(movement: Movement) {
     }
   });
   // update latitude & longitude
-  let latitude = parseFloat(position.get("latitude") as string);
-  latitude = latitude + north - south;
-  let longitude = parseFloat(position.get("longitude") as string);
-  longitude = longitude + east - west;
+  let latitude = position.get("latitude");
+  latitude = parseInt(latitude) + parseInt(north) - parseInt(south);
+  let longitude = position.get("longitude");
+  longitude = parseInt(longitude) + parseInt(east) - parseInt(west);
 
   try {
     await position.update({

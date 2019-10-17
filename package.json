@@ -13,6 +13,7 @@
     "dev-test": "tsc -w -p test",
     "dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"blue.bold,green.bold\" \"npm run watch-ts\" \"npm run nodemon\"",
     "build": "tsc",
+    "buildauto" : "tsc -w",
     "build-test": "tsc -p test",
     "nodemon": "nodemon --delay 1500ms -e js --watch dist ."
   },

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { TrackEvent, DriverPosition } from "./orm";
+import { TrackEvent } from "./orm";
 import { delay } from "bluebird";
 import { bus } from "./bus";
 
