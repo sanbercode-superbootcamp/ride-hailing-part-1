@@ -47,6 +47,7 @@ export async function performanceUpdater(movement: Movement) {
 
 export function performanceProjector(): number {
     return bus.subscribe("rider.moved", (movement: Movement) => {
+        console.log('Movement: ',movement)
         performanceUpdater(movement);
     });
 };
@@ -63,13 +64,23 @@ export async function riderPerformance(req: Request, res: Response) {
     return;
     }
     
+    // try{
+    //     DriverPerformance.findAll({
+    //         where : {rider_id : riderId},
+    //         attributes : ['point']
+    //     }).then((result) => {
+    //         res.json(result)
+    //     })
+    //     }catch(err){
+    //         console.log(err)
+    //         res.status(400)
+    //     } 
     const result = await DriverPerformance.findAll({ 
       where: { rider_id: riderId },
       raw: true
     });
     
     const { point } = JSON.parse(JSON.stringify(result[0]));
-    
     res.send({ point });
 
 };

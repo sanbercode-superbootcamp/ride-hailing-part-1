@@ -11,7 +11,7 @@ const app = express();
 app.set('port', PORT);
 app.use(cors());
 
-app.get('/point/:rider_id',jsonBodyParser(), riderPerformance);
+app.get('/point/:rider_id', jsonBodyParser(), riderPerformance);
 const server = createServer(app);
 
 export function startServer(): Server {

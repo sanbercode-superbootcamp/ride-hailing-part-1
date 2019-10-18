@@ -19,6 +19,18 @@ DriverPerformance.init(
   { modelName: 'driver_performance', sequelize: db }
 )
 
+export class TrackEvent extends Model {}
+TrackEvent.init(
+  {
+    rider_id: DataTypes.INTEGER,
+    north: DataTypes.FLOAT,
+    west: DataTypes.FLOAT,
+    east: DataTypes.FLOAT,
+    south: DataTypes.FLOAT
+  },
+  { modelName: "track_event", sequelize: db }
+);
+
 export function syncDB(): Promise<Sequelize> {
   return db.sync();
 }
