@@ -5,8 +5,9 @@
   "main": "dist/driver-tracker/index.js",
   "scripts": {
     "start": "node .",
-    "start-track": "node dist/driver-tracker",
-    "start-position": "node dist/position",
+    "start-tracker": "nodemon dist/driver-tracker",
+    "start-position": "nodemon dist/position",
+    "start-performance": "nodemon dist/performance",
     "test": "nyc mocha",
     "test-e2e": "nyc mocha --config ./test/.mocharc.yaml",
     "watch-ts": "tsc -w",
@@ -51,6 +52,18 @@
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "sequelize": "^5.19.6",
-    "source-map-support": "^0.5.13"
-  }
+    "source-map-support": "^0.5.13",
+    "sqlite3": "^4.1.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hasan-Nabil/ride-hailing-part-1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hasan-Nabil/ride-hailing-part-1/issues"
+  },
+  "homepage": "https://github.com/Hasan-Nabil/ride-hailing-part-1#readme"
 }
