@@ -5,7 +5,6 @@ import { Server } from 'net';
 import { json as jsonBodyParser } from 'body-parser';
 import { riderPerformance } from './performance';
 
-
 const PORT = process.env['RH_PORT'] || 3002;
 
 const app = express();

@@ -29,7 +29,7 @@ export async function positionUpdater(movement: Movement) {
   latitude = latitude + parseFloat(north.toString()) - parseFloat(south.toString());
   let longitude = parseFloat(position.get("longitude") as string);
   longitude = longitude + parseFloat(east.toString()) - parseFloat(west.toString());
-
+  console.log(latitude)
   try {
     await position.update({
       latitude,
@@ -69,6 +69,6 @@ export async function riderPos(req: Request, res: Response) {
   });
 
   const { latitude, longitude } = JSON.parse(JSON.stringify(result[0]));
-
+  console.log(result[0])
   res.status(200).send({ latitude, longitude });
 }

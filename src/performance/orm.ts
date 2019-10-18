@@ -10,11 +10,11 @@ const db = new Sequelize({
   logging: false
 });
 
-export class DriverPerformance extends Model {};
+export class DriverPerformance extends Model {}
 DriverPerformance.init(
   {
     rider_id: DataTypes.INTEGER,
-    point: DataTypes.INTEGER,
+    point: DataTypes.FLOAT,
   },
   { modelName: 'driver_performance', sequelize: db }
 )
