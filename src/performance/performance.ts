@@ -23,9 +23,10 @@ export async function performanceUpdater(movement: Movement) {
     })
 
     let point = parseFloat(position.get("point") as string);
-    let latitude = parseFloat(JSON.stringify(north)) - parseFloat(JSON.stringify(south))
-    let longitude = parseFloat(JSON.stringify(west)) - parseFloat(JSON.stringify(east))
-    point = point + (Math.sqrt(Math.pow(latitude, 2) + Math.pow(longitude, 2)))
+    let latitude = north - south
+    let longitude = west - east
+    point = point + Math.round((Math.sqrt(Math.pow(latitude, 2) + Math.pow(longitude, 2)))/1000)
+    console.log('point ', point);
     try {
         await position.update({ 
             point
