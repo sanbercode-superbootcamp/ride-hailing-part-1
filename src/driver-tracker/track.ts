@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { TrackEvent, DriverPosition } from "./orm";
-import { delay } from "bluebird";
+import { TrackEvent } from "./orm";
 import { bus } from "./bus";
 
 export async function track(req: Request, res: Response) {

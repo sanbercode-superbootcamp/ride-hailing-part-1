@@ -3,16 +3,15 @@ import * as cors from 'cors';
 import { createServer } from 'http';
 import { Server } from 'net';
 import { json as jsonBodyParser } from 'body-parser';
-import { riderPos } from './position';
+import { riderPerformance } from './performance';
 
-
-const PORT = process.env['RH_PORT'] || 3001;
+const PORT = process.env['RH_PORT'] || 3002;
 
 const app = express();
 app.set('port', PORT);
 app.use(cors());
 
-app.get('/position/:rider_id',jsonBodyParser(), riderPos);
+app.get('/point/:rider_id', jsonBodyParser(), riderPerformance);
 const server = createServer(app);
 
 export function startServer(): Server {
