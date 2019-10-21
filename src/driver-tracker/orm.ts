@@ -32,15 +32,6 @@ DriverPosition.init(
   { modelName: 'driver_position', sequelize: db }
 );
 
-export class DriverPoint extends Model {};
-DriverPoint.init(
-  {
-    rider_id: DataTypes.INTEGER,
-    points: DataTypes.INTEGER,
-  },
-  { modelName: 'driver_points', sequelize: db }
-);
-
 export function syncDB(): Promise<Sequelize> {
   return db.sync();
 }

@@ -36,9 +36,10 @@ export class DriverPoint extends Model {};
 DriverPoint.init(
   {
     rider_id: DataTypes.INTEGER,
+    jarak_tempuh: DataTypes.INTEGER,
     points: DataTypes.INTEGER,
   },
-  { modelName: 'driver_points', sequelize: db }
+  { modelName: "driver_point", sequelize: db }
 );
 
 export function syncDB(): Promise<Sequelize> {
